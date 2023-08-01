@@ -11,18 +11,20 @@ t_size strlen(const char* str);
 class string
 {
 private:
-    t_size _capacity, _size;
+    t_size  _size, _capacity;
     char* _str;
 
 public:
 
     string();
 
+    string(const string& str);
+
     string(const char* str);
 
     ~string();
 
-    string& operator=(const string& other);
+    string& operator=(const string& other) noexcept;
 
     const char* c_str() const noexcept;
 };
