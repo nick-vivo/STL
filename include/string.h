@@ -5,13 +5,7 @@ namespace mstd
 {
 using t_size = long int;
 
-t_size strlen(const char* str)
-{
-    t_size count = 0;
-    while(*str)
-        ++count;
-    return count;
-}
+t_size strlen(const char* str);
 
 // #define __STRING_STANDART_SIZE 32
 // class string
