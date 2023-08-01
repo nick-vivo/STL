@@ -9,3 +9,12 @@ TEST(string_strlen, all)
     ASSERT_EQ(mstd::strlen("1"), 1);
     ASSERT_EQ(mstd::strlen("99999"), 5);
 }
+
+TEST(string_class, constructor_destructor)
+{
+    mstd::string test("AZBUKA");
+    ASSERT_STREQ(test.c_str(), "AZBUKA");
+    
+    mstd::string null("");
+    ASSERT_STREQ("", null.c_str());
+}

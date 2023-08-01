@@ -5,11 +5,12 @@ project(STL CXX)
 add_library(string SHARED "include/string.hpp" "src/string.cc")
 target_include_directories(string PUBLIC "include")
 
+
 #tests
 option(TESTSING "Create target string_tests for testing" ON)
 set(TESTSING ON)
 
-#result
+
 if(${TESTSING})
     add_subdirectory(tests)
     set(G_TARGETS gmock_main gmock gtest gtest_main)
