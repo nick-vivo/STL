@@ -13,6 +13,12 @@ add_library(string SHARED ${STRING_LIB})
 target_include_directories(string PUBLIC "include")
 target_link_libraries(string tools)
 
+#list
+set(LIST_LIB "include/list.h" "src/list.cc")
+add_library(list SHARED ${LIST_LIB})
+target_include_directories(list PUBLIC "include")
+target_link_libraries(list)
+
 #vector
 set(VECTOR_LIB "include/vector.h" "src/vector.cc")
 add_library(vector SHARED ${VECTOR_LIB})
@@ -36,4 +42,4 @@ endif()
 
 add_executable(main test.cpp)
 target_include_directories(main PUBLIC "include")
-target_link_libraries(main vector string)
+target_link_libraries(main vector string list)
