@@ -19,6 +19,7 @@ add_library(vector SHARED ${VECTOR_LIB})
 target_include_directories(vector PUBLIC "include")
 target_link_libraries(vector tools)
 
+
 #tests
 option(TESTSING "Create target string_tests for testing" ON)
 set(TESTSING ON)
