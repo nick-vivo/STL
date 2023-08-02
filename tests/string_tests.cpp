@@ -85,4 +85,10 @@ TEST(string_operators, all)
     ASSERT_EQ(a.size(), mstd::strlen(d));
     ASSERT_TRUE(a == d);
     ASSERT_FALSE(a == c);
+
+    ASSERT_TRUE(a + b == "NULLNULL");
+    ASSERT_TRUE(a + c == "NULLNOTN");
+
+    ASSERT_TRUE(d + a == "NULLNULL");
+    ASSERT_TRUE(c + d == "NOTNNULL");
 }

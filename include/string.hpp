@@ -10,6 +10,7 @@ using t_size = long int;
 t_size strlen(const char* str);
 
 #define __STRING_STANDART_SIZE 32
+#define __STRING_STANDART_STEP 10
 class string
 {
 private:
@@ -29,6 +30,8 @@ public:
     string& operator=(const mstd::string& other) noexcept;
 
     string& operator=(const char* other) noexcept;
+
+    string operator+(const string& other) const noexcept;
 
     char& operator[](t_size index);
 
@@ -50,6 +53,8 @@ bool operator==(const string& str_1, const string& str_2) noexcept;
 
 bool operator==(const string& str_1, const char* str_2) noexcept;
 
+string operator+(const string& str_1, const char* str_2) noexcept;
+string operator+(const char* str_2, const string& str_1) noexcept;
 }
 
 inline char& mstd::string::operator[](mstd::t_size index)

@@ -28,7 +28,7 @@ target_link_libraries(vector tools)
 
 #tests
 option(TESTSING "Create target string_tests for testing" ON)
-set(TESTSING OFF)
+set(TESTSING ON)
 
 
 if(${TESTSING})

@@ -79,6 +79,34 @@ mstd::string& mstd::string::operator=(const char* other) noexcept
 
 }
 
+mstd::string mstd::string::operator+(const mstd::string& other) const noexcept
+{
+mstd::string tmp;
+tmp._size = this->_size + other._size;
+
+if(tmp._size + 1 > tmp._capacity)
+{
+    delete[] tmp._str;
+    while(tmp._size + 1 > tmp._capacity)
+    {
+        tmp._capacity += __STRING_STANDART_STEP;
+    }
+    tmp._str = new char[tmp._capacity];
+}
+
+mstd::t_size i = 0;
+for(;i < this->_size; ++i)
+{
+    tmp._str[i] = this->_str[i];
+}
+
+for(;i < tmp._size + 1; ++i)
+{
+    tmp._str[i] = other._str[i - this->_size];
+}
+
+return tmp;
+}
 
 void mstd::string::swap(string& other)
 {
@@ -119,4 +147,15 @@ bool mstd::operator==(const mstd::string& str_1, const char* str_2) noexcept
         }
     }
     return true;
+}
+
+
+mstd::string mstd::operator+(const mstd::string& str_1, const char* str_2) noexcept 
+{
+    return str_1 + string(str_2);
+}
+
+mstd::string mstd::operator+(const char* str_2, const mstd::string& str_1) noexcept 
+{
+    return string(str_2) + str_1;
 }
