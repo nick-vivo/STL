@@ -2,6 +2,8 @@
 #include <gtest/gtest.h>
 #include <string.hpp>
 
+#include <iostream>
+
 TEST(string_strlen, all)
 {
     ASSERT_EQ(mstd::strlen("std"), 3);
@@ -69,4 +71,18 @@ TEST(string_class, constructor_destructor_methods)
     ASSERT_EQ(null.at(2), 'L');
     ASSERT_EQ(null.at(3), 'L');
     ASSERT_EQ(null[4], '\0');
+}
+
+TEST(string_operators, all)
+{
+    mstd::string a("NULL");
+    mstd::string b("NULL");
+    mstd::string c("NOTN");
+    char d[] = "NULL";
+    ASSERT_TRUE(a == b);
+    ASSERT_FALSE(a == c);
+    
+    ASSERT_EQ(a.size(), mstd::strlen(d));
+    //ASSERT_TRUE(a == d);
+    //ASSERT_TRUE(a == c);
 }

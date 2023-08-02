@@ -26,13 +26,15 @@ public:
 
     ~string();
 
-    string& operator=(const string& other) noexcept;
+    string& operator=(const mstd::string& other) noexcept;
 
     string& operator=(const char* other) noexcept;
 
     char& operator[](t_size index);
 
     char& at(t_size index);
+
+    char c_at(t_size index) const;
 
     const char* c_str() const noexcept;
 
@@ -42,6 +44,10 @@ public:
 
     void swap(string& other);
 };
+
+bool operator==(const string& str_1, const char* str_2) noexcept;
+
+// bool operator==(const string& str_1, const string& str_2) noexcept;
 
 }
 
@@ -59,6 +65,14 @@ inline char& mstd::string::at(t_size index)
     return this->_str[index];
 }
 
+inline char mstd::string::c_at(t_size index) const
+{
+    if (index >= this->_size || index < 0)
+    {
+        throw "Index is bad value";
+    }
+    return this->_str[index];
+}
 
 inline const char* mstd::string::c_str() const noexcept
 {
