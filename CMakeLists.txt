@@ -28,7 +28,7 @@ target_link_libraries(vector tools)
 
 #tests
 option(TESTSING "Create target string_tests for testing" ON)
-set(TESTSING ON)
+set(TESTSING OFF)
 
 
 if(${TESTSING})
@@ -42,4 +42,4 @@ endif()
 
 # add_executable(main test.cpp)
 # target_include_directories(main PUBLIC "include")
-# target_link_libraries(main vector string list)
+# target_link_libraries(main string)

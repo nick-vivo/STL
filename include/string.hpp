@@ -45,9 +45,10 @@ public:
     void swap(string& other);
 };
 
-bool operator==(const string& str_1, const char* str_2) noexcept;
 
-// bool operator==(const string& str_1, const string& str_2) noexcept;
+bool operator==(const string& str_1, const string& str_2) noexcept;
+
+bool operator==(const string& str_1, const char* str_2) noexcept;
 
 }
 

@@ -83,6 +83,6 @@ TEST(string_operators, all)
     ASSERT_FALSE(a == c);
     
     ASSERT_EQ(a.size(), mstd::strlen(d));
-    //ASSERT_TRUE(a == d);
-    //ASSERT_TRUE(a == c);
+    ASSERT_TRUE(a == d);
+    ASSERT_FALSE(a == c);
 }

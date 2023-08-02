@@ -88,6 +88,23 @@ void mstd::string::swap(string& other)
 }
 
 //out string
+
+bool mstd::operator==(const mstd::string& str_1, const mstd::string& str_2) noexcept
+{
+    if(str_1.size() != str_2.size())
+    {
+        return false;
+    }
+    for (mstd::t_size i = 0; i < str_1.size(); ++i)
+    {
+        if (str_1.c_at(i) != str_2.c_at(i))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 bool mstd::operator==(const mstd::string& str_1, const char* str_2) noexcept
 {
     if(str_1.size() != mstd::strlen(str_2))
@@ -96,26 +113,10 @@ bool mstd::operator==(const mstd::string& str_1, const char* str_2) noexcept
     }
     for (mstd::t_size i = 0; i < str_1.size(); ++i)
     {
-        if (str_1.c_at(0) != str_2[i])
+        if (str_1.c_at(i) != str_2[i])
         {
             return false;
         }
     }
     return true;
 }
-
-// bool mstd::operator==(const mstd::string& str_1, const mstd::string& str_2) noexcept
-// {
-//     if(str_1.size() != str_2.size())
-//     {
-//         return false;
-//     }
-//     for (mstd::t_size i = 0; i < str_1.size(); ++i)
-//     {
-//         if (str_1.c_at(i) != str_2.c_at(i))
-//         {
-//             return false;
-//         }
-//     }
-//     return true;
-// }
