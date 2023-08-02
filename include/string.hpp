@@ -1,6 +1,8 @@
 #ifndef __STRING_HPP__
 #define __STRING_HPP__
 
+#include <tools.h>
+
 namespace mstd
 {
 using t_size = long int;
@@ -26,7 +28,19 @@ public:
 
     string& operator=(const string& other) noexcept;
 
+    string& operator=(const char* other) noexcept;
+
+    char& operator[](t_size index);
+
+    char& at(t_size index);
+
     const char* c_str() const noexcept;
+
+    t_size size() const noexcept;
+
+    t_size capacity() const noexcept;
+
+    void swap(string& other);
 };
 
 }
