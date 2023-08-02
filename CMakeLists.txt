@@ -26,3 +26,7 @@ if(${TESTSING})
     target_include_directories(string_tests PUBLIC "tests/googletest/googlemock/include" "tests/googletest/googletest/include" "include")
     target_link_libraries(string_tests ${G_TARGETS} string)
 endif()
+
+# add_executable(main main.cpp)
+# target_include_directories(main PUBLIC "include")
+# target_link_libraries(main string)

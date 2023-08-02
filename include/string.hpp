@@ -45,4 +45,34 @@ public:
 
 }
 
+inline char& mstd::string::operator[](mstd::t_size index)
+{
+    return this->_str[index];
+}
+
+inline char& mstd::string::at(t_size index)
+{
+    if (index >= this->_size || index < 0)
+    {
+        throw "Index is bad value";
+    }
+    return this->_str[index];
+}
+
+
+inline const char* mstd::string::c_str() const noexcept
+{
+    return this->_str;
+}
+
+inline mstd::t_size mstd::string::size() const noexcept
+{
+    return this->_size;
+}
+
+inline mstd::t_size mstd::string::capacity() const noexcept
+{
+    return this->_capacity;
+}
+
 #endif

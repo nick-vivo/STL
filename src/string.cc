@@ -54,44 +54,29 @@ mstd::string& mstd::string::operator=(const mstd::string& other) noexcept
         {
             this->_str[i] = other._str[i];
         }
+        this->_size = other._size;
     }
     return *this;
 }
 
-//TODO: доделать
 mstd::string& mstd::string::operator=(const char* other) noexcept
 {
-
-}
-
-char& mstd::string::operator[](mstd::t_size index)
-{
-    return this->_str[index];
-}
-
-char& mstd::string::at(t_size index)
-{
-    if (index >= this->_size || index < 0)
+    t_size other_size = strlen(other);
+    if (this->_capacity < other_size + 1)
     {
-        throw "Index is bad value";
+        string tmp(other);
+        this->swap(tmp);
     }
-    return this->_str[index];
-}
+    else
+    {
+        for(mstd::t_size i = 0; i <= other_size; ++i)
+        {
+            this->_str[i] = other[i];
+        }
+        this->_size = other_size;
+    }
+    return *this;
 
-
-const char* mstd::string::c_str() const noexcept
-{
-    return this->_str;
-}
-
-mstd::t_size mstd::string::size() const noexcept
-{
-    return this->_size;
-}
-
-mstd::t_size mstd::string::capacity() const noexcept
-{
-    return this->_capacity;
 }
 
 void mstd::string::swap(string& other)

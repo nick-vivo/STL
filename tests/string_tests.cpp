@@ -48,4 +48,25 @@ TEST(string_class, constructor_destructor_methods)
 //THROW
     ASSERT_ANY_THROW(test_cp.at(6));
 
+    null = test;
+    ASSERT_STREQ(null.c_str(), "AZBUKA");
+    //CHECK CONTAINER
+    ASSERT_EQ(null.size(), 6);
+    ASSERT_EQ(null.capacity(), 7);
+    ASSERT_EQ(null.at(0), 'A');
+    ASSERT_EQ(null.at(1), 'Z');
+    ASSERT_EQ(null.at(2), 'B');
+    ASSERT_EQ(null.at(3), 'U');
+    ASSERT_EQ(null.at(4), 'K');
+    ASSERT_EQ(null.at(5), 'A');
+    ASSERT_EQ(null[6], '\0');
+
+    null = "NULL";
+    ASSERT_EQ(null.size(), 4);
+    ASSERT_EQ(null.capacity(), 7);
+    ASSERT_EQ(null.at(0), 'N');
+    ASSERT_EQ(null.at(1), 'U');
+    ASSERT_EQ(null.at(2), 'L');
+    ASSERT_EQ(null.at(3), 'L');
+    ASSERT_EQ(null[4], '\0');
 }
