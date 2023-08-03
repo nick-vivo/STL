@@ -36,10 +36,14 @@ set(TESTSING OFF)
 if(${TESTSING})
     add_subdirectory(tests)
     set(G_TARGETS gmock_main gmock gtest gtest_main)
-    
+
     add_executable(string_tests tests/string_tests.cpp)
     target_include_directories(string_tests PUBLIC "tests/googletest/googlemock/include" "tests/googletest/googletest/include" "include")
     target_link_libraries(string_tests ${G_TARGETS} string)
+
+    add_executable(vector_test tests/vector_test.cpp)
+    target_include_directories(vector_test PUBLIC "tests/googletest/googlemock/include" "tests/googletest/googletest/include" "include")
+    target_link_libraries(vector_test ${G_TARGETS} vector)
 endif()
 
 # add_executable(main test.cpp)
