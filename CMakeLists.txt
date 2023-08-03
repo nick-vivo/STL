@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.27.1)
 
 project(STL CXX)
 
+include_directories(include)
+
 #tools
 set(TOOLS_LIB "include/tools.h" "src/tools.cc")
 add_library(tools SHARED ${TOOLS_LIB})
