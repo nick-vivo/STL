@@ -27,6 +27,11 @@ add_library(vector SHARED ${VECTOR_LIB})
 target_include_directories(vector PUBLIC "include")
 target_link_libraries(vector tools)
 
+#memory 
+set(MEMORY_LIB "include/memory.h" "src/memory.cc")
+add_library(memory SHARED ${VECTOR_LIB})
+target_include_directories(memory PUBLIC "include")
+target_link_libraries(memory tools)
 
 #tests
 option(TESTSING "Create target string_tests for testing" ON)
