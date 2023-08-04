@@ -1,7 +1,7 @@
 #ifndef __MEMORY_H__
 #define __MEMORY_H__
 #include <tools.h>
-#include <iostream>
+
 namespace mstd
 {
  
@@ -16,47 +16,21 @@ private:
 public:
     shared_ptr(): _data(nullptr), _count(nullptr) {}
 
-    shared_ptr(T* pointer): _data(pointer)
+//moved point in shared_ptr, later point = nullptr
+    shared_ptr(T*& pointer): _data(pointer)
     {
-        if(pointer == nullptr)
-            _count = nullptr;
-        else
+        if(pointer)
+        {
             _count = new t_count(1);
+            pointer = nullptr;
+        }
+        else
+            _count = nullptr;
     }
 
     shared_ptr(const shared_ptr<T>& other): _data(other._data), _count(other._count)
     {
         ++*this->_count;
-    }
-
-    shared_ptr& operator=(const shared_ptr& other) 
-    {
-        this->~shared_ptr();
-        this->_data = other._data;
-        this->_count = other._count;
-        ++*this->_count;
-        return *this;
-    }
-
-    inline T& operator*()
-    {
-        return *this->_data;
-    }
-
-    inline T* operator->()
-    {
-        return this->_data;
-    }
-
-    inline t_count count()
-    {
-        return *this->_count;
-    }
-
-    void swap(shared_ptr<T> &other)
-    {
-        mstd::swap(this->_data, other._data);
-        mstd::swap(this->_count, other._count);
     }
 
     ~shared_ptr()
@@ -65,17 +39,71 @@ public:
         {
             delete _data;
             delete _count;
-            std::cout << "Вызвался декструктор, память очистилась";
         }
         else if( _data && _count)
         {
             --*_count;
-            std::cout << "Вызвался деструткор -1";
         }
     }
 
-};
+    shared_ptr<T>& operator=(const shared_ptr<T>& other) noexcept
+    {
+        this->~shared_ptr();
+        this->_data = other._data;
+        this->_count = other._count;
+        ++*this->_count;
+        return *this;
+    }
 
+    shared_ptr<T>& operator=(T*& other) noexcept
+    {
+        this->reset(other);
+    }
+
+
+    void reset() noexcept
+    {
+       this->~shared_ptr();
+       this->_data = nullptr;
+       this->_count = nullptr;
+    }
+
+//if you want use this point with new point use this method
+    void reset(T*& new_point) noexcept
+    {
+       this->~shared_ptr();
+       this->_data = new_point;
+       if (new_point)
+       {
+            _count = new t_count(1);
+            new_point = nullptr;
+       }
+       else
+            _count = nullptr;
+    }
+  
+    inline T& operator*() noexcept
+    {
+        return *this->_data;
+    }
+
+    inline T* operator->() noexcept
+    {
+        return this->_data;
+    }
+
+    inline t_count count() noexcept
+    {
+        return *this->_count;
+    }
+  
+    void swap(shared_ptr<T> &other) noexcept
+    {
+        mstd::swap(this->_data, other._data);
+        mstd::swap(this->_count, other._count);
+    }
+
+};
 
 }
 

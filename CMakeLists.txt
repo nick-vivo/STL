@@ -27,6 +27,7 @@ add_library(vector SHARED ${VECTOR_LIB})
 target_include_directories(vector PUBLIC "include")
 target_link_libraries(vector tools exception)
 
+
 #memory
 set(MEMORY_LIB "include/memory.h" "src/memory.cc")
 add_library(memory SHARED ${MEMORY_LIB})
