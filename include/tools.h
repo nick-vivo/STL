@@ -17,4 +17,5 @@ void mstd::swap(T& first, T& second)
     first = second;
     second = tmp;
 }
+
 #endif
