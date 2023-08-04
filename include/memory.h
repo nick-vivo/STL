@@ -1,6 +1,7 @@
 #ifndef __MEMORY_H__
 #define __MEMORY_H__
 #include <tools.h>
+
 namespace mstd
 {
  
@@ -80,7 +81,7 @@ public:
        else
             _count = nullptr;
     }
-
+  
     inline T& operator*() noexcept
     {
         return *this->_data;
@@ -95,14 +96,14 @@ public:
     {
         return *this->_count;
     }
-
+  
     void swap(shared_ptr<T> &other) noexcept
     {
         mstd::swap(this->_data, other._data);
         mstd::swap(this->_count, other._count);
     }
-};
 
+};
 
 }
 

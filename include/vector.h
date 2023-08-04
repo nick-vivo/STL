@@ -2,6 +2,7 @@
 #define __VECTOR_H__
 
 #include <tools.h>
+#include <exception.h>
 
 namespace mstd
 {
@@ -101,7 +102,7 @@ void vector<T>::insert(t_size index, T const &value)
 {
     if (index > this->_size || index < 0)
     {
-        throw "Index is bad value"; // TODO: позже приписать сюда свой runtime
+        throw mstd::runtime_error("Index is bad value"); // TODO: позже приписать сюда свой runtime
     }
     this->push_back(value);
     for (t_size i = this->_size - 1; i != index; --i)
@@ -115,7 +116,7 @@ inline T& vector<T>::at(t_size index)
 {
     if (index >= this->_size || index < 0)
     {
-        throw "Index is bad value"; // TODO: позже приписать сюда свой runtime
+        throw mstd::runtime_error("Index is bad value"); // TODO: позже приписать сюда свой runtime
     }
     return this->_data[index];
 }
