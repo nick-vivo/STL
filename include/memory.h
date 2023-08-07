@@ -108,6 +108,12 @@ public:
 
 };
 
+template<typename T>
+shared_ptr<T> make_shared(const T& Class)
+{
+    return mstd::shared_ptr<T> = new T(Class);
+}
+
 }
 
 #endif
