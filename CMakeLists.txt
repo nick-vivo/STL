@@ -34,22 +34,29 @@ add_library(memory SHARED ${MEMORY_LIB})
 target_include_directories(memory PUBLIC "include")
 target_link_libraries(memory tools)
 
+
 #tests
 option(TESTSING "Create target string_tests for testing" ON)
-set(TESTSING OFF)
+set(TESTSING ON)
 
 
 if(${TESTSING})
     add_subdirectory(tests)
     set(G_TARGETS gmock_main gmock gtest gtest_main)
 
-    add_executable(string_tests tests/string_tests.cpp)
-    target_include_directories(string_tests PUBLIC "tests/googletest/googlemock/include" "tests/googletest/googletest/include" "include")
-    target_link_libraries(string_tests ${G_TARGETS} string)
+#string
+    add_executable(string_test tests/string_test.cpp)
+    target_include_directories(string_test PUBLIC "tests/googletest/googlemock/include" "tests/googletest/googletest/include" "include")
+    target_link_libraries(string_test ${G_TARGETS} string)
 
+#vector
     add_executable(vector_test tests/vector_test.cpp)
     target_include_directories(vector_test PUBLIC "tests/googletest/googlemock/include" "tests/googletest/googletest/include" "include")
     target_link_libraries(vector_test ${G_TARGETS} vector)
+#memory
+    add_executable(memory_test tests/memory_test.cpp)
+    target_include_directories(memory_test PUBLIC "tests/googletest/googlemock/include" "tests/googletest/googletest/include" "include")
+    target_link_libraries(memory_test ${G_TARGETS} memory)
 endif()
 
 # add_executable(main main.cpp)

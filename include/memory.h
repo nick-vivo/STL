@@ -58,6 +58,7 @@ public:
     shared_ptr<T>& operator=(T*& other) noexcept
     {
         this->reset(other);
+        return *this;
     }
 
 
@@ -94,6 +95,8 @@ public:
 
     inline t_count count() noexcept
     {
+        if(this->_count == nullptr)
+            return 0;
         return *this->_count;
     }
   
