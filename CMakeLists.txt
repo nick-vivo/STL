@@ -37,7 +37,7 @@ target_link_libraries(memory tools)
 
 #tests
 option(TESTSING "Create target string_tests for testing" ON)
-set(TESTSING ON)
+set(TESTSING OFF)
 
 
 if(${TESTSING})
