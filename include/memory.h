@@ -2,6 +2,8 @@
 #define __MEMORY_H__
 #include <tools.h>
 
+//Библиотека написана плохо, используй smart_pointers из 
+//set, это лишь напоминание о прошлом
 namespace mstd
 {
  

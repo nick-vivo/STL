@@ -36,11 +36,11 @@ target_link_libraries(memory tools)
 
 
 #tests
-option(TESTSING "Create target string_tests for testing" ON)
-set(TESTSING OFF)
+option(TESTSING "Create target string_tests for testing" OFF)
 
 
-if(${TESTSING})
+
+if(TESTSING)
     add_subdirectory(tests)
     set(G_TARGETS gmock_main gmock gtest gtest_main)
 
