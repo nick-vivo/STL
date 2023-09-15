@@ -43,6 +43,8 @@ public:
 
     inline void clear() noexcept;
 
+    void remove(t_size index);
+
 };
 
 
@@ -113,7 +115,7 @@ void vector<T>::insert(t_size index, T const &value)
 {
     if (index > this->_size || index < 0)
     {
-        throw mstd::exception("Index is bad value"); // TODO: позже приписать сюда свой runtime
+        throw mstd::exception("Index is bad value");
     }
     this->push_back(value);
     for (t_size i = this->_size - 1; i != index; --i)
@@ -163,6 +165,27 @@ inline void vector<T>::clear() noexcept
         this->_capacity = 0;
         this->_step = __STEP_STANDART;
     }
+}
+
+
+template<typename T>
+void vector<T>::remove(t_size index)
+{
+    if (index >= this->_size || index < 0)
+    {
+        throw mstd::exception("Index is bad value");
+    }
+
+    for (t_size i = index; i != this->_size; ++i)
+    {
+        mstd::swap(this->_data[i], this->_data[i + 1]);
+    }
+
+    --this->_size;
+
+    vector<T> cp(*this);
+
+    this->swap(cp);
 }
 
 }
