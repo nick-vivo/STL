@@ -1,5 +1,8 @@
 #include <string.hpp>
-//functions
+
+//code
+
+
 mstd::t_size mstd::strlen(const char* str)
 {
     t_size count = 0;
@@ -11,7 +14,10 @@ mstd::t_size mstd::strlen(const char* str)
     return count;
 }
 
+
 //class string
+
+
 mstd::string::string(): _size(0), _capacity(__STRING_STANDART_SIZE + 1), _str(new char[this->_capacity])
 {
     this->_str[0] = '\0';

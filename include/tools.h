@@ -4,11 +4,14 @@
 namespace mstd
 {
 
-//Work with ctor copy and operator=
+//Work with ctor copy and operator=;
 template<class T>
 void swap(T& first, T& second);
 
 }
+
+
+//code
 
 template<class T>
 void mstd::swap(T& first, T& second)

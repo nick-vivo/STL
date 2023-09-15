@@ -1,122 +1,180 @@
 #ifndef __MEMORY_H__
 #define __MEMORY_H__
-#include <tools.h>
 
-//Библиотека написана плохо, используй smart_pointers из 
-//set, это лишь напоминание о прошлом
 namespace mstd
 {
- 
-using t_count = unsigned int;
-
-template<typename T>
-class shared_ptr
-{
-private:
-    T* _data;
-    t_count* _count;
-public:
-    shared_ptr(): _data(nullptr), _count(nullptr) {}
-
-//moved point in shared_ptr, later point = nullptr
-    shared_ptr(T*& pointer): _data(pointer)
-    {
-        if(pointer)
-        {
-            _count = new t_count(1);
-            pointer = nullptr;
-        }
-        else
-            _count = nullptr;
-    }
-
-    shared_ptr(const shared_ptr<T>& other): _data(other._data), _count(other._count)
-    {
-        ++*this->_count;
-    }
-
-    ~shared_ptr()
-    {
-        if(_data && *_count == 1)
-        {
-            delete _data;
-            delete _count;
-        }
-        else if( _data && _count)
-        {
-            --*_count;
-        }
-    }
-
-    shared_ptr<T>& operator=(const shared_ptr<T>& other) noexcept
-    {
-        this->~shared_ptr();
-        this->_data = other._data;
-        this->_count = other._count;
-        ++*this->_count;
-        return *this;
-    }
-
-    shared_ptr<T>& operator=(T*& other) noexcept
-    {
-        this->reset(other);
-        return *this;
-    }
-
-
-    void reset() noexcept
-    {
-       this->~shared_ptr();
-       this->_data = nullptr;
-       this->_count = nullptr;
-    }
-
-//if you want use this point with new point use this method
-    void reset(T*& new_point) noexcept
-    {
-       this->~shared_ptr();
-       this->_data = new_point;
-       if (new_point)
-       {
-            _count = new t_count(1);
-            new_point = nullptr;
-       }
-       else
-            _count = nullptr;
-    }
-  
-    inline T& operator*() noexcept
-    {
-        return *this->_data;
-    }
-
-    inline T* operator->() noexcept
-    {
-        return this->_data;
-    }
-
-    inline t_count count() noexcept
-    {
-        if(this->_count == nullptr)
-            return 0;
-        return *this->_count;
-    }
-  
-    void swap(shared_ptr<T> &other) noexcept
-    {
-        mstd::swap(this->_data, other._data);
-        mstd::swap(this->_count, other._count);
-    }
-
-};
+using uint = unsigned int;
 
 template<class T>
-shared_ptr<T> make_shared(const T& Class)
+class shared_ptr
 {
-    T* ptr = new T(Class);
-    return mstd::shared_ptr(ptr);
+
+    T* _data;
+    uint* _size;
+
+public:
+
+    shared_ptr<T>();
+
+    shared_ptr<T>(T* data);
+
+    shared_ptr<T>(const shared_ptr<T>& other);
+
+    virtual ~shared_ptr();
+    
+    void reset();
+
+    void reset(T* new_pointer) noexcept;
+
+    uint use_count() const noexcept;
+
+    T& operator*() noexcept;
+
+    T* operator->() noexcept;
+
+    bool operator==(const shared_ptr<T>& other) const noexcept;
+
+    bool operator!=(const shared_ptr<T>& other) const noexcept;
+
+    shared_ptr<T>& operator=(const shared_ptr<T>& shared_pt);
+
+    shared_ptr<T>& operator=(decltype(nullptr));
+
+    operator bool() const;
+};
+
 }
 
+//code
+
+
+template<class T>
+mstd::shared_ptr<T>::shared_ptr(): _data( nullptr ), _size( nullptr ) {}
+
+
+template<class T>
+mstd::shared_ptr<T>::shared_ptr(T* data): _data(data)
+{
+    {
+        if ( _data )
+            this->_size = new uint(1);
+        else
+            this->_size = nullptr;
+    }
+
+}
+
+
+template <class T>
+mstd::shared_ptr<T>::shared_ptr(const mstd::shared_ptr<T> &other) : _data(other._data), _size(other._size)
+{
+    if (other._data)
+        ++*this->_size;
+}
+
+
+template <class T>
+mstd::shared_ptr<T>::~shared_ptr()
+{
+    if (this->_data && *this->_size == 1)
+    {
+        delete this->_size;
+        delete this->_data;
+    }
+    else if (this->_data && *this->_size > 1)
+    {
+        --*this->_size;
+    }
+    this->_data = nullptr;
+    this->_size = nullptr;
+}
+
+
+template <class T>
+void mstd::shared_ptr<T>::reset()
+{
+    this->~shared_ptr();
+}
+
+
+template <class T>
+void mstd::shared_ptr<T>::reset(T *new_pointer) noexcept
+{
+    this->reset();
+    this->_data = new_pointer;
+
+    if (new_pointer)
+        this->_size = new uint(1);
+}
+
+
+template <class T>
+mstd::uint mstd::shared_ptr<T>::use_count() const noexcept
+{
+    return *this->_size;
+}
+
+
+template <class T>
+T &mstd::shared_ptr<T>::operator*() noexcept
+{
+    return *_data;
+}
+
+
+template <class T>
+T *mstd::shared_ptr<T>::operator->() noexcept
+{
+    return _data;
+}
+
+
+template <class T>
+bool mstd::shared_ptr<T>::operator==(const shared_ptr<T> &other) const noexcept
+{
+    return (this->_data == other._data);
+}
+
+
+template <class T>
+bool mstd::shared_ptr<T>::operator!=(const mstd::shared_ptr<T> &other) const noexcept
+{
+    return (this->_data != other._data);
+}
+
+
+template <class T>
+mstd::shared_ptr<T>& mstd::shared_ptr<T>::operator=(const mstd::shared_ptr<T> &shared_pt)
+{
+    if (this->_data)
+        this->~shared_ptr();
+
+    this->_data = shared_pt._data;
+    this->_size = shared_pt._size;
+
+    if (this->_data)
+        ++*this->_size;
+
+    return *this;
+}
+
+
+template<class T>
+mstd::shared_ptr<T>& mstd::shared_ptr<T>::operator=(decltype(nullptr))
+{
+    this->~shared_ptr();
+
+    return *this;
+}
+
+
+template <class T>
+mstd::shared_ptr<T>::operator bool() const
+{
+    if (_data)
+        return true;
+    else
+        return false;
 }
 
 #endif

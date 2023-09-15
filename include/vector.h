@@ -12,11 +12,12 @@ using t_size = long int;
 template<typename T>
 class vector
 {
-private:
+
     t_size _step;
     t_size _capacity;
     t_size _size;
     T* _data;
+
 public:
     vector();
     vector(const vector<T> &other); 
@@ -37,16 +38,20 @@ public:
 
     inline T& at(t_size index);
 
-// //If size == 0 method do not throw except 
+//If size == 0 method do not throw except 
     void pop_back();
 
     inline void clear() noexcept;
 
 };
 
-//Реализация
+
+//code
+
+
 template <typename T>
 vector<T>::vector() : _step(__STEP_STANDART), _capacity(0), _size(0), _data(nullptr) {}
+
 
 template <typename T>
 vector<T>::vector(const vector<T> &other) : _step(other._step), _capacity(other._capacity), _size(other._size), _data(new T[this->_capacity])
@@ -55,12 +60,14 @@ vector<T>::vector(const vector<T> &other) : _step(other._step), _capacity(other.
         this->_data[i] = other._data[i];
 }
 
+
 template <typename T>
 vector<T>::~vector()
 {
     if (this->_data != nullptr)
         delete[] this->_data;
 }
+
 
 template <typename T>
 void vector<T>::swap(vector<T> &other) noexcept
@@ -71,17 +78,20 @@ void vector<T>::swap(vector<T> &other) noexcept
     mstd::swap(this->_capacity, other._capacity);
 }
 
+
 template <typename T>
 inline mstd::t_size mstd::vector<T>::capacity() const noexcept
 {
     return this->_capacity;
 }
 
+
 template <typename T>
 inline mstd::t_size mstd::vector<T>::size() const noexcept
 {
     return this->_size;
 }
+
 
 template <typename T>
 void mstd::vector<T>::push_back(T const &value) noexcept
@@ -97,12 +107,13 @@ void mstd::vector<T>::push_back(T const &value) noexcept
     ++this->_size;
 }
 
+
 template <typename T>
 void vector<T>::insert(t_size index, T const &value)
 {
     if (index > this->_size || index < 0)
     {
-        throw mstd::runtime_error("Index is bad value"); // TODO: позже приписать сюда свой runtime
+        throw mstd::exception("Index is bad value"); // TODO: позже приписать сюда свой runtime
     }
     this->push_back(value);
     for (t_size i = this->_size - 1; i != index; --i)
@@ -111,15 +122,17 @@ void vector<T>::insert(t_size index, T const &value)
     }
 }
 
+
 template <typename T>
 inline T& vector<T>::at(t_size index)
 {
     if (index >= this->_size || index < 0)
     {
-        throw mstd::runtime_error("Index is bad value"); // TODO: позже приписать сюда свой runtime
+        throw mstd::exception("Index is bad value"); // TODO: позже приписать сюда свой runtime
     }
     return this->_data[index];
 }
+
 
 template <typename T>
 void mstd::vector<T>::pop_back()
@@ -137,6 +150,7 @@ void mstd::vector<T>::pop_back()
     else if (this->_size - 1 == 0)
         this->clear();
 }
+
 
 template <typename T>
 inline void vector<T>::clear() noexcept

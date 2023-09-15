@@ -20,13 +20,5 @@ public:
     const char* what() const noexcept;
 };
 
-class runtime_error: public exception
-{
-public:
-    runtime_error();
-    runtime_error(const char* message);
-    runtime_error(const mstd::string message);
-};
-
 }
 #endif

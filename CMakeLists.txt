@@ -29,36 +29,31 @@ target_link_libraries(vector tools exception)
 
 
 #memory
-set(MEMORY_LIB "include/memory.h" "src/memory.cc")
-add_library(memory SHARED ${MEMORY_LIB})
-target_include_directories(memory PUBLIC "include")
-target_link_libraries(memory tools)
+add_library(memory include/memory.h src/memory.cc)
+target_link_libraries(memory)
 
 
 #tests
-option(TESTSING "Create target string_tests for testing" OFF)
+option(TEST "Create target string_tests for testing" OFF)
 
 
 
-if(TESTSING)
-    add_subdirectory(tests)
-    set(G_TARGETS gmock_main gmock gtest gtest_main)
+if(TEST)
+    add_subdirectory(modules/googletest)
+    set(TEST_INCLUDE gmock_main gmock gtest gtest_main)
 
 #string
-    add_executable(string_test tests/string_test.cpp)
-    target_include_directories(string_test PUBLIC "tests/googletest/googlemock/include" "tests/googletest/googletest/include" "include")
-    target_link_libraries(string_test ${G_TARGETS} string)
+    add_executable(gtest_string test/gtest_string.cpp)
+    target_include_directories(gtest_string PUBLIC "modules/googletest/googlemock/include" "modules/googletest/googletest/include")
+    target_link_libraries(gtest_string ${TEST_INCLUDE} string)
 
 #vector
-    add_executable(vector_test tests/vector_test.cpp)
-    target_include_directories(vector_test PUBLIC "tests/googletest/googlemock/include" "tests/googletest/googletest/include" "include")
-    target_link_libraries(vector_test ${G_TARGETS} vector)
+    add_executable(gtest_vector test/gtest_vector.cpp)
+    target_include_directories(gtest_vector PUBLIC "modules/googletest/googlemock/include" "modules/googletest/googletest/include")
+    target_link_libraries(gtest_vector ${TEST_INCLUDE} vector)
 #memory
-    add_executable(memory_test tests/memory_test.cpp)
-    target_include_directories(memory_test PUBLIC "tests/googletest/googlemock/include" "tests/googletest/googletest/include" "include")
-    target_link_libraries(memory_test ${G_TARGETS} memory)
+    add_executable(gtest_memory test/gtest_memory.cpp)
+    target_include_directories(gtest_memory PUBLIC "modules/googletest/googlemock/include" "modules/googletest/googletest/include")
+    target_link_libraries(gtest_memory ${TEST_INCLUDE} memory)
 endif()
 
-# add_executable(main main.cpp)
-# target_include_directories(main PUBLIC "include")
-# target_link_libraries(main memory)
