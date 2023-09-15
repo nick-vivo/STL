@@ -34,11 +34,11 @@ target_link_libraries(memory)
 
 
 #tests
-option(TEST "Create target string_tests for testing" OFF)
+option(GTEST_STL "Create target string_tests for testing" OFF)
 
 
 
-if(TEST)
+if(GTEST_STL)
     add_subdirectory(modules/googletest)
     set(TEST_INCLUDE gmock_main gmock gtest gtest_main)
 
