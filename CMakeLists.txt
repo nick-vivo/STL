@@ -27,10 +27,22 @@ add_library(vector SHARED ${VECTOR_LIB})
 target_include_directories(vector PUBLIC "include")
 target_link_libraries(vector tools exception)
 
-
 #memory
-add_library(memory include/memory.h src/memory.cc)
+set(MEMORY_LIB include/memory.h src/memory.cc)
+add_library(memory SHARED ${MEMORY_LIB})
 target_link_libraries(memory)
+
+
+#list
+set(LIST_LIB "include/list.h" "src/list.cc")
+add_library(list SHARED ${LIST_LIB})
+target_include_directories(list PUBLIC "include")
+target_link_libraries(list memory exception)
+
+#main
+add_executable(main main.cpp)
+target_include_directories(main PUBLIC "include")
+target_link_libraries(main list)
 
 
 #tests
