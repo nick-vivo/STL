@@ -3,7 +3,8 @@
 
 #include <memory.h>
 #include <exception.h>
-
+#include <tools.h>
+#include <initializer_list>
 
 namespace mstd
 {
@@ -50,13 +51,20 @@ public:
         } while(tmp != other._head);
     }
 
-    // List<T>& operator=(const List<T>& other)
-    // {
-    //     this->clear();
+    List(std::initializer_list<T> values): _head(), _tail(), _count(0)
+    {        
+        for (T i : values) 
+        {
+            this->push_back(i);
+        }
+    }
 
-    //     for(t_size i = 0; i < other->_count)
-    //         this->push_back();
-    // }
+    List<T>& operator=(List<T> other)
+    {
+        this->swap(other);
+
+        return *this;
+    }
 
     void push_back(T data)
     {
@@ -249,13 +257,12 @@ public:
         return _count;
     }
 
-//TODO: здесь нужно переделать swap в memory.h
-    // void swap(List<T>& other)
-    // {
-    //     swap_standart(this->_count, other._count);
-    //     swap_standart(this->_head, other._head);
-    //     swap_standart(this->_tail, other._tail);
-    // }
+    void swap(List<T>& other)
+    {
+        _head.swap(other._head);
+        _tail.swap(other._tail);
+        mstd::swap(_count, other._count);
+    }
 
 private:
 
@@ -285,17 +292,9 @@ private:
         return node;
     }
 
-private:
-
-    // template<typename И>
-    // static void swap_standart(И& first, И& second)
-    // {
-    //     T tmp = first;
-    //     first = second;
-    //     second = tmp;
-    // }
-
 };
+
 }
+
 
 #endif

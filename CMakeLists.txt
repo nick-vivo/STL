@@ -37,7 +37,7 @@ target_link_libraries(memory tools)
 set(LIST_LIB "include/list.h" "src/list.cc")
 add_library(list SHARED ${LIST_LIB})
 target_include_directories(list PUBLIC "include")
-target_link_libraries(list memory exception)
+target_link_libraries(list memory exception tools)
 
 #main
 add_executable(main main.cpp)

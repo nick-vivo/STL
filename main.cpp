@@ -1,18 +1,17 @@
 #include <iostream>
 #include <memory.h>
+#include <list.h>
 
-using namespace mstd;
+#include <string>
+
+using namespace std;
 
 int main()
 {
 
-    mstd::shared_ptr<int> a(new int(4));
+    mstd::List<int> a =  {1, 2, 3};
+    
 
-    mstd::shared_ptr<int> b(new int(5));
-
-    b.swap(a);
-
-    std::cout << *a << ":" << *b;
-
+    std::cout << a[0] << ":" << a[1] << ":" << a[2];
     return 0;
 }
