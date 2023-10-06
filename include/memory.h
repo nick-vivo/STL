@@ -1,6 +1,8 @@
 #ifndef __MEMORY_H__
 #define __MEMORY_H__
 
+#include <tools.h>
+
 namespace mstd
 {
 using uint = unsigned int;
@@ -26,6 +28,8 @@ public:
 
     void reset(T* new_pointer) noexcept;
 
+    void swap(mstd::shared_ptr<T> other) noexcept;
+
     uint use_count() const noexcept;
 
     T& operator*() noexcept;
@@ -41,6 +45,7 @@ public:
     shared_ptr<T>& operator=(decltype(nullptr));
 
     operator bool() const;
+
 };
 
 }
@@ -107,6 +112,12 @@ void mstd::shared_ptr<T>::reset(T *new_pointer) noexcept
         this->_size = new uint(1);
 }
 
+template<class T>
+void mstd::shared_ptr<T>::swap(mstd::shared_ptr<T> other) noexcept
+{
+    mstd::swap(this->_data, other._data);
+    mstd::swap(this->_size, other._size);
+}
 
 template <class T>
 mstd::uint mstd::shared_ptr<T>::use_count() const noexcept
@@ -176,5 +187,7 @@ mstd::shared_ptr<T>::operator bool() const
     else
         return false;
 }
+
+
 
 #endif

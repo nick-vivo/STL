@@ -30,7 +30,7 @@ target_link_libraries(vector tools exception)
 #memory
 set(MEMORY_LIB include/memory.h src/memory.cc)
 add_library(memory SHARED ${MEMORY_LIB})
-target_link_libraries(memory)
+target_link_libraries(memory tools)
 
 
 #list
