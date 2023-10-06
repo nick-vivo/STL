@@ -1,33 +1,18 @@
 #include <iostream>
-#include <list.h>
+#include <memory.h>
 
 using namespace mstd;
 
 int main()
 {
-    
-    List<int> ls;
 
-    //ls.push_front(3);
+    mstd::shared_ptr<int> a(new int(4));
 
-    ls.push_front(3);
-    
-    ls.push_front(2);
+    mstd::shared_ptr<int> b(new int(5));
 
-    ls.push_front(1);
+    b.swap(a);
 
-    ls.push_front(0);
+    std::cout << *a << ":" << *b;
 
-    std::cout << "Was: " << ls[0] << ":" << ls[1] << ":" << ls[2] << ":" << ls[3] << ":\n";
-
-    List<int> ls2;
-
-    ls2.push_front(1);
-
-    ls2.push_front(1);
-
-    std::cout << "Stalo: " << ls2[0] << ":" << ls2[1] << ":\n";
-
-    //std::cout << ls[1];
     return 0;
 }

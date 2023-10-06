@@ -42,7 +42,7 @@ target_link_libraries(list memory exception)
 #main
 add_executable(main main.cpp)
 target_include_directories(main PUBLIC "include")
-target_link_libraries(main list)
+target_link_libraries(main list memory)
 
 
 #tests

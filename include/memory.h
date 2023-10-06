@@ -28,7 +28,7 @@ public:
 
     void reset(T* new_pointer) noexcept;
 
-    void swap(mstd::shared_ptr<T> other) noexcept;
+    void swap(mstd::shared_ptr<T>& other) noexcept;
 
     uint use_count() const noexcept;
 
@@ -113,7 +113,7 @@ void mstd::shared_ptr<T>::reset(T *new_pointer) noexcept
 }
 
 template<class T>
-void mstd::shared_ptr<T>::swap(mstd::shared_ptr<T> other) noexcept
+void mstd::shared_ptr<T>::swap(mstd::shared_ptr<T>& other) noexcept
 {
     mstd::swap(this->_data, other._data);
     mstd::swap(this->_size, other._size);
