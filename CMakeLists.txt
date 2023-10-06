@@ -39,6 +39,12 @@ add_library(list SHARED ${LIST_LIB})
 target_include_directories(list PUBLIC "include")
 target_link_libraries(list memory exception tools)
 
+#set
+set(SET_LIB "include/set.h" "src/set.cc")
+add_library(set SHARED ${SET_LIB})
+
+target_include_directories(set PUB)
+
 #main
 add_executable(main main.cpp)
 target_include_directories(main PUBLIC "include")
