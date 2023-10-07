@@ -51,6 +51,12 @@ public:
         } while(tmp != other._head);
     }
 
+    List(List<T>&& other): List()
+    {
+        this->swap(other);       
+    }
+
+
     List(std::initializer_list<T> values): _head(), _tail(), _count(0)
     {        
         for (T i : values) 
@@ -292,6 +298,12 @@ private:
         return node;
     }
 
+public:
+
+    bool empty()
+    {
+        return !_head;
+    }
 };
 
 }

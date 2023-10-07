@@ -42,13 +42,13 @@ target_link_libraries(list memory exception tools)
 #set
 set(SET_LIB "include/set.h" "src/set.cc")
 add_library(set SHARED ${SET_LIB})
-
-target_include_directories(set PUB)
+target_include_directories(set PUBLIC "include")
+target_link_libraries(set memory list)
 
 #main
 add_executable(main main.cpp)
 target_include_directories(main PUBLIC "include")
-target_link_libraries(main list memory)
+target_link_libraries(main list memory set)
 
 
 #tests
@@ -69,9 +69,11 @@ if(GTEST_STL)
     add_executable(gtest_vector test/gtest_vector.cpp)
     target_include_directories(gtest_vector PUBLIC "modules/googletest/googlemock/include" "modules/googletest/googletest/include")
     target_link_libraries(gtest_vector ${TEST_INCLUDE} vector)
+
 #memory
     add_executable(gtest_memory test/gtest_memory.cpp)
     target_include_directories(gtest_memory PUBLIC "modules/googletest/googlemock/include" "modules/googletest/googletest/include")
     target_link_libraries(gtest_memory ${TEST_INCLUDE} memory)
+
 endif()
 
