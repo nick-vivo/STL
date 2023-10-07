@@ -37,7 +37,7 @@ namespace mstd
 
         Set(const Set& other): Set()
         {
-            List<T> ls = other->get_list();
+            List<T> ls = other.get_list();
 
             for(t_size i = 0; i < ls.size(); ++i)
             {
