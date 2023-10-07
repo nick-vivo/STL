@@ -5,7 +5,6 @@
 #include <memory.h>
 #include <list.h>
 #include <exception.h>
-#include <iostream>
 
 namespace mstd
 {
@@ -46,6 +45,19 @@ namespace mstd
             }
         }
 
+        Set(std::initializer_list<T> values): Set()
+        {        
+            for (T i : values) 
+            {
+                this->insert(i);
+            }
+        }
+
+        Set(Set&& other): Set()
+        {
+            this->swap(other);
+        }
+        
         void swap(Set& other)
         {
             mstd::swap(this->root, other.root);
