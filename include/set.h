@@ -116,7 +116,7 @@ namespace mstd
 
         bool empty() const noexcept
         {
-            return root;
+            return !root;
         }
 
         t_size size() const noexcept
