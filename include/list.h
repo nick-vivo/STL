@@ -12,8 +12,11 @@ namespace mstd
 template<class T>
 class List
 {
+public:
+
+using t_size = int;
+
 private:
-    using t_size = int;
     
     class Node
     {

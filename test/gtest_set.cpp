@@ -54,5 +54,13 @@ TEST(ALL, all)
 
     ASSERT_EQ(ls[3], 1);
 
+    mstd::Set<int> b = {1, 2, 3};
+    mstd::Set<int> c = {1, 2, 3};
+    mstd::Set<int> d = {1, 2};
 
+    mstd::Set<int> f = {1, 2, 4};
+
+    ASSERT_TRUE( b == c );
+    ASSERT_FALSE( b == d);
+    ASSERT_FALSE( b == f );
 }

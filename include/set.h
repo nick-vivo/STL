@@ -124,6 +124,27 @@ namespace mstd
             return this->_size;
         }
 
+        bool operator==(const Set<T> other)
+        {
+            if (this->_size != other._size)
+            {
+                return false;
+            }
+
+            mstd::List<T> ls1 = this->get_list();
+            mstd::List<T> ls2 = other.get_list();
+
+
+            for (t_size i = 0; i < ls1.size(); ++i)
+            {
+                if( ls1[i] != ls2[i] )
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
     private:
     
     ptr_n __findNode(ptr_n src, T dst)
