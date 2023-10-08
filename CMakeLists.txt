@@ -75,5 +75,10 @@ if(GTEST_STL)
     target_include_directories(gtest_memory PUBLIC "modules/googletest/googlemock/include" "modules/googletest/googletest/include")
     target_link_libraries(gtest_memory ${TEST_INCLUDE} memory)
 
+#set
+    add_executable(gtest_set test/gtest_set.cpp)
+    target_include_directories(gtest_set PUBLIC "modules/googletest/googlemock/include" "modules/googletest/googletest/include")
+    target_link_libraries(gtest_set ${TEST_INCLUDE} set)
+
 endif()
 

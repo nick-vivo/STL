@@ -24,6 +24,11 @@ namespace mstd
             Node(T data): data(data), left(nullptr), right(nullptr) {}
 
             Node(T data, mstd::shared_ptr<Node> left, mstd::shared_ptr<Node> right): data(data), left(left), right(right) {}
+
+            T data_const() const
+            {
+                return this->data;
+            }
         };
 
         using ptr_n = mstd::shared_ptr<Node>;
@@ -109,12 +114,12 @@ namespace mstd
             }
         }
 
-        bool empty()
+        bool empty() const noexcept
         {
             return root;
         }
 
-        t_size size()
+        t_size size() const noexcept
         {
             return this->_size;
         }
@@ -147,7 +152,7 @@ namespace mstd
 
     public:
 
-        List<T> get_list()
+        List<T> get_list() const
         {
             List<T> ls;
 
@@ -157,12 +162,12 @@ namespace mstd
         }
 
     private:
-        void __get_list(List<T>& list, ptr_n node)
+        void __get_list(List<T>& list, ptr_n node) const
         {
             if (node)
             {
                 __get_list(list, node->right);
-                list.push_back(node->data);
+                list.push_back(node->data_const());
                 __get_list(list, node->left);
             }
         }
