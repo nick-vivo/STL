@@ -75,6 +75,18 @@ public:
         return *this;
     }
 
+    List<T>& operator=(std::initializer_list<T> values)
+    {
+        this->clear();
+
+        for (T i : values) 
+        {
+            this->push_back(i);
+        }
+
+        return *this;        
+    }
+
     void push_back(T data)
     {
         ptr_n add( new Node(data) );
