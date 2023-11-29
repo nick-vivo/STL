@@ -45,10 +45,10 @@ add_library(set SHARED ${SET_LIB})
 target_include_directories(set PUBLIC "include")
 target_link_libraries(set memory list)
 
-#main
-add_executable(main main.cpp)
-target_include_directories(main PUBLIC "include")
-target_link_libraries(main list)
+# #main
+# add_executable(main main.cpp)
+# target_include_directories(main PUBLIC "include")
+# target_link_libraries(main list)
 
 
 #tests
