@@ -40,6 +40,14 @@ public:
 
     bool operator!=(const shared_ptr<T>& other) const noexcept;
 
+    bool operator<(const shared_ptr<T>& other) const noexcept;
+
+    bool operator>(const shared_ptr<T>& other) const noexcept;
+
+    bool operator<=(const shared_ptr<T>& other) const noexcept;
+
+    bool operator>=(const shared_ptr<T>& other) const noexcept;
+
     shared_ptr<T>& operator=(const shared_ptr<T>& shared_pt);
 
     shared_ptr<T>& operator=(decltype(nullptr));
@@ -153,6 +161,30 @@ bool mstd::shared_ptr<T>::operator!=(const mstd::shared_ptr<T> &other) const noe
     return (this->_data != other._data);
 }
 
+template <class T>
+bool mstd::shared_ptr<T>::operator<(const shared_ptr<T> &other) const noexcept
+{
+    return (this->_data < other._data);
+}
+
+template <class T>
+bool mstd::shared_ptr<T>::operator>(const shared_ptr<T> &other) const noexcept
+{
+    return (this->_data > other._data);
+}
+
+
+template <class T>
+bool mstd::shared_ptr<T>::operator<=(const shared_ptr<T> &other) const noexcept
+{
+    return (this->_data <= other._data);
+}
+
+template <class T>
+bool mstd::shared_ptr<T>::operator>=(const shared_ptr<T> &other) const noexcept
+{
+    return (this->_data >= other._data);
+}
 
 template <class T>
 mstd::shared_ptr<T>& mstd::shared_ptr<T>::operator=(const mstd::shared_ptr<T> &shared_pt)

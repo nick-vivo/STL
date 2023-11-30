@@ -153,65 +153,25 @@ namespace mstd
             return *this;
         }
 
-        // bool operator<(const Iterator& other)
-        // {
-        //     mstd::shared_ptr<Node> tmp = it;
+        bool operator<(const Iterator& other) const
+        {
+            return it < other.it;
+        }
 
-        //     do
-        //     {
+        bool operator>(const Iterator& other) const
+        {
+            return it > other.it;
+        }
 
-        //         tmp = tmp->next;
-        //         if (other.it == tmp)
-        //             return true;
+        bool operator<=(const Iterator& other) const
+        {
+            return it <= other.it;
+        }
 
-        //     } while (tmp != List<T>::_head);
-
-        //     return false;
-        // }
-
-        // bool operator>(const Iterator& other)
-        // {
-        //     mstd::shared_ptr<Node> tmp = it;
-
-        //     do
-        //     {
-
-        //         tmp = tmp->previous;
-        //         if (other.it == tmp)
-        //             return true;
-
-        //     } while (tmp != List<T>::_tail);
-
-        //     return false;
-        // }
-
-        // bool operator<=(const Iterator& other)
-        // {
-        //     mstd::shared_ptr<Node> tmp = it;
-
-        //     while(tmp != List<T>::_head)
-        //     {
-        //         tmp = tmp->next;
-        //         if (other.it == tmp)
-        //             return true;
-
-        //     }
-        //     return false;
-        // }
-
-        // bool operator>=(const Iterator& other)
-        // {
-        //     mstd::shared_ptr<Node> tmp = it;
-
-        //     while(tmp != List<T>::_tail)
-        //     {
-        //         tmp = tmp->previous;
-        //         if (other.it == tmp)
-        //             return true;
-
-        //     }
-        //     return false;
-        // }
+        bool operator>=(const Iterator& other) const
+        {
+            return it >= other.it;
+        }
     };
     
 
