@@ -32,6 +32,7 @@ namespace mstd
         mstd::shared_ptr<Node<T>> it;
 
     public:
+
         Iterator() : it(nullptr) {}
 
         Iterator(const ptr_n &new_it) : it(new_it) {}
@@ -310,6 +311,21 @@ namespace mstd
             } while (tmp != other._head);
         }
 
+        List(Iterator<T> begin, Iterator<T> end) : List()
+        {
+            if (begin > end)
+            {
+                throw mstd::exception("Iterators is bad");
+            }
+
+            do
+            {
+                this->push_back(*begin);
+            } while (begin++ != end);
+
+            this->push_back(*end);
+        }
+
         List(List<T> &&other) : List()
         {
             this->swap(other);
@@ -340,6 +356,32 @@ namespace mstd
             }
 
             return *this;
+        }
+
+        bool operator==(List<T>& other)
+        {
+            if (this->_count != other._count)
+                return false;
+
+            for(unsigned long int i = 0; i < this->_count; ++i)
+            {
+                if (this->operator[](i) != other.operator[](i))
+                    return false;
+            }
+            return true;
+        }
+
+        bool operator!=(List<T>& other)
+        {
+            if (this->_count != other._count)
+                return true;
+
+            for(unsigned long int i = 0; i < this->_count; ++i)
+            {
+                if (this->operator[](i) != other.operator[](i))
+                    return true;
+            }
+            return false;
         }
 
         void push_back(T data)

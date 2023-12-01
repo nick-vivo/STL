@@ -45,10 +45,16 @@ add_library(set SHARED ${SET_LIB})
 target_include_directories(set PUBLIC "include")
 target_link_libraries(set memory list)
 
-# #main
+
+#sorts
+set(SORTS_LIB "include/sorts.hh" "src/sorts.cc")
+add_library(sorts SHARED ${SORTS_LIB})
+target_link_libraries(sorts exception)
+
+#main
 # add_executable(main main.cpp)
 # target_include_directories(main PUBLIC "include")
-# target_link_libraries(main list)
+# target_link_libraries(main list sorts)
 
 
 #tests
